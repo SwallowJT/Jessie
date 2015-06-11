@@ -10,5 +10,8 @@ public:
 	static Scene*  createScene();
 	virtual bool init();
 	CREATE_FUNC(GameOverScene);
+	void initBG();
+private:
+	Sprite *bg1, *bg2, *bg3, *bg4, *bg5, *bg6;
 };
 #endif

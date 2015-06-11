@@ -40,7 +40,7 @@ bool StartScene::init()
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	
-	initBG();
+ 	initBG();
 
 	//hero
 	auto hero = Sprite::create("Ship1.png");
@@ -118,6 +118,8 @@ void StartScene::initBG()
 	bg6->setPosition(Vec2(visibleSize.width * 3 / 2 + origin.x, visibleSize.height / 2 + origin.y));
 	this->addChild(bg5, 1);
 	this->addChild(bg6, 1);
+
+
 }
 
 void StartScene::update(float delta)
@@ -125,6 +127,7 @@ void StartScene::update(float delta)
 	moveBG(bg1, bg2, bg1Speed, delta);
 	moveBG(bg3, bg4, bg3Speed, delta);
 	moveBG(bg5, bg6, bg5Speed, delta);
+
 }
 
 void StartScene::moveBG(Sprite *background1, Sprite *background2, float speed,float delta)

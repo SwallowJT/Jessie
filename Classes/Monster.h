@@ -13,5 +13,6 @@ public:
 	CREATE_FUNC(Monster);
 	bool isShow;
 	bool isCollideWithHero(Hero *hero);
+	void blink();
 };
 #endif

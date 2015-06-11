@@ -20,3 +20,19 @@ bool Monster::isCollideWithHero(Hero *hero)
 	}
 	return false;
 }
+
+void Monster::blink()
+{
+	Animation *animation = Animation::create();
+	for (int i = 2; i < 4; i++)
+	{
+		char szName[100] = { 0 };
+		sprintf(szName, "spike%d.png", i);
+		animation->addSpriteFrame(SpriteFrameCache::getInstance()->spriteFrameByName(szName));
+	}
+	animation->setDelayPerUnit(0.5);
+	animation->setRestoreOriginalFrame(true);
+	Animate *action = Animate::create(animation);
+	getSprite()->runAction(RepeatForever::create(action));
+
+}

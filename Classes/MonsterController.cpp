@@ -12,12 +12,16 @@ bool MonsterController::init()
 
 void MonsterController::createMonsters()
 {
+
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Monster *monster = NULL;
 	for (int i = 0; i < MAX_MONSTER;i++)
 	{
 		monster = Monster::create();
 		monster->bindSprite(Sprite::createWithSpriteFrameName("spike.png"));
+		monster->blink();
+		//将blink的代码放在这里不行
+
 		monster->setPosition(Vec2(visibleSize.width + CCRANDOM_0_1() * 2000, visibleSize.height * CCRANDOM_0_1()));
 		this->addChild(monster,1);
 		m_monster.pushBack(monster);
