@@ -20,9 +20,9 @@ bool GameOverScene::init()
 	auto gameOver = Label::createWithSystemFont("GAME OVER", "Abduction.ttf", 50, blockSize,
 		TextHAlignment::CENTER, TextVAlignment::CENTER);
 	gameOver->setAnchorPoint(Vec2(0, 0.5));
-	gameOver->setPosition(Vec2(300, 300));//blockSize.width, size.height / 2);
-	gameOver->setColor(Color3B(255, 255, 255));
+	gameOver->setPosition(Vec2(blockSize.width, size.height / 2));
 	this->addChild(gameOver);
 
+	return true;
 }
 
