@@ -1,5 +1,5 @@
 #include "GameScene.h"
-#include "GameOverLayer.h"
+#include "GameOverScene.h"
 
 #define bg1Speed 500
 #define bg3Speed 400

@@ -1,4 +1,4 @@
-#include "AppDelegate.h"
+﻿#include "AppDelegate.h"
 #include "StartScene.h"
 
 USING_NS_CC;
@@ -37,11 +37,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
         glview = GLViewImpl::create("My Game");
         director->setOpenGLView(glview);
     }
-    auto visibleSize = director->getVisibleSize();
 
-	glview->setFrameSize(visibleSize.width, visibleSize.height);
-    glview->setDesignResolutionSize(visibleSize.width, visibleSize.height, ResolutionPolicy::SHOW_ALL);
-    
+	glview->setFrameSize(540,360);//设置窗口分辨率
+	glview->setDesignResolutionSize(540,360, ResolutionPolicy::SHOW_ALL); //设计分辨率（可视区域）
+														//SHOW_ALL按参数形成的比例缩放以适应屏幕大小
 
     // turn on display FPS
     director->setDisplayStats(true);

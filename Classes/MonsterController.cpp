@@ -1,5 +1,5 @@
 #include "MonsterController.h"
-#include "GameOverLayer.h"
+#include "GameOverScene.h"
 
 #define MAX_MONSTER 5
 
@@ -42,9 +42,10 @@ void MonsterController::update(float delta)
 			{
 				if (monster->isCollideWithHero(m_hero))
 				{
-					m_hero->stopAllActions();
-					m_hero->setVisible(false);
-					m_hero->setIsAlive(false);
+// 					m_hero->stopAllActions();
+// 					m_hero->setVisible(false);
+// 					m_hero->setIsAlive(false);
+					Director::getInstance()->replaceScene(GameOverScene::createScene());
 				}
 			}
 		}
