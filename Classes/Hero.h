@@ -16,6 +16,7 @@ public:
 	void setIsTouch(bool aa);
 	bool getisAlive();
 	void setIsAlive(bool bb);
+
 private:
 	bool isAlive;
 	bool isTouch;

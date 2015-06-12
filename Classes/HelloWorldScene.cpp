@@ -1,5 +1,6 @@
 #include "HelloWorldScene.h"
-#include "Particle3D/PU/CCPUParticleSystem3D.h"
+#include "Hero.h"
+#include "Monster.h"
 
 USING_NS_CC;
 
@@ -57,9 +58,41 @@ bool HelloWorld::init()
 
 	sprite->runAction(RepeatForever::create(action));
 	
+	auto hero = Hero::create();
+	hero->bindSprite(Sprite::createWithSpriteFrameName("jet4.png"));
+	this->addChild(hero, 1);
+	hero->setPosition(Vec2(0,0));
 
-	//
-    
+	auto monster = Monster::create();
+	monster->bindSprite(Sprite::createWithSpriteFrameName("spike.png"));
+	this->addChild(monster, 1);
+	monster->setPosition(Vec2(300, 100));
+
+// 	DrawPrimitives::setDrawColor4B(255, 255, 0, 255);
+// 	glLineWidth(10);
+// 	Vec2 vertices[] = { Vec2(0, 0), Vec2(50, 50), Vec2(100, 50), Vec2(100, 100), Vec2(50, 100) };
+// 	DrawPrimitives::drawPoly(vertices, 5, false);
+
+	auto s = Director::getInstance()->getWinSize();
+
+	auto draw = DrawNode::create();
+	addChild(draw, 10);
+
+
+	// draw 4 small points
+	Vec2 position[] = { Vec2(60, 60), Vec2(70, 70), Vec2(60, 70), Vec2(70, 60) };
+	draw->drawPoints(position, 4, 5, Color4F(CCRANDOM_0_1(), CCRANDOM_0_1(), CCRANDOM_0_1(), 1));
+
+	//draw->drawRect(Vec2(monster->getBoundingBox.getMinX(), monster->getBoundingBox.getMinY()),Vec2(monster->getBoundingBox.getMaxX(), monster->getBoundingBox.getMaxY()),Color4F(1, 0, 1, 1));
+	Vec2 monster_x = Vec2(monster->getBoundingBox().getMinX(), monster->getBoundingBox().getMinY());
+	Vec2 monster_yy = Vec2(monster->getBoundingBox().getMaxX(), monster->getBoundingBox().getMaxY());
+	draw->drawRect(monster_x, monster_yy, Color4F(1, 1, 0, 1));
+
+	Vec2 hero_x = Vec2(hero->getBoundingBox().getMinX(), hero->getBoundingBox().getMinY());
+	Vec2 hero_yy = Vec2(hero->getBoundingBox().getMaxX(), hero->getBoundingBox().getMaxY());
+	draw->drawRect(hero_x, hero_yy, Color4F(1, 1, 0, 1));
+	draw->drawPoint(monster->getPosition(), 10, Color4F(1, 1, 0, 1));
+
     return true;
 }
 

@@ -46,10 +46,16 @@ void MonsterController::update(float delta)
 			{
 				if (monster->isCollideWithHero(m_hero))
 				{
-// 					m_hero->stopAllActions();
-// 					m_hero->setVisible(false);
-// 					m_hero->setIsAlive(false);
-					Director::getInstance()->replaceScene(GameOverScene::createScene());
+					m_hero->stopAllActions();
+					m_hero->setVisible(false);
+					monster->setVisible(false);
+					auto baozha = Sprite::create("Explosion1.png");
+					this->addChild(baozha, 1);
+					baozha->setPosition(Vec2(monster->getBoundingBox().getMidX(), monster->getBoundingBox().getMidY()));
+					auto action1 = Blink::create(0.5, 1);
+					auto action = Sequence::create(action1, CallFuncN::create(CC_CALLBACK_1(MonsterController::replace_scene, this)), nullptr);
+					baozha->runAction(action);
+					
 				}
 			}
 		}
@@ -58,6 +64,11 @@ void MonsterController::update(float delta)
 			monster->isShow = true;
 		}
 	}
+}
+
+void MonsterController::replace_scene(Node *node)
+{
+	Director::getInstance()->replaceScene(GameOverScene::createScene());
 }
 
 void MonsterController::bindHero(Hero *hero)

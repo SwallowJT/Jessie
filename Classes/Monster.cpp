@@ -12,7 +12,7 @@ bool Monster::isCollideWithHero(Hero *hero)
 	if (hero->getisAlive())
 	{
 		Rect rect = hero->getBoundingBox();
-		Vec2 point = this->getPosition();
+		Vec2 point = Vec2(this->getBoundingBox().getMidX(),this->getBoundingBox().getMidY());//得到的是障碍物的左下角，因为锚点在左下角（Node）this->getPosition();
 		if (rect.containsPoint(point))
 		{
 			return true;

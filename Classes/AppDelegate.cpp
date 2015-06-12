@@ -1,7 +1,6 @@
 ﻿#include "AppDelegate.h"
-#include "StartScene.h"
 #include "HelloWorldScene.h"
-#include "GameOverScene.h"
+#include "StartScene.h"
 
 USING_NS_CC;
 
