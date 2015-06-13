@@ -39,8 +39,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
         director->setOpenGLView(glview);
     }
 
-	glview->setFrameSize(540,360);//设置窗口分辨率
-	glview->setDesignResolutionSize(540,360, ResolutionPolicy::SHOW_ALL); //设计分辨率（可视区域）
+	glview->setFrameSize(500,400);//设置窗口分辨率
+	glview->setDesignResolutionSize(1024,512, ResolutionPolicy::SHOW_ALL); //设计分辨率（可视区域）
 														//SHOW_ALL按参数形成的比例缩放以适应屏幕大小
 
     // turn on display FPS

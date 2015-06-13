@@ -2,8 +2,6 @@
 
 bool Monster::init()
 {
-	isShow = false;
-
 	return true;
 }
 

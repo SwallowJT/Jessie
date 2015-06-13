@@ -4,6 +4,8 @@
 #include "cocos2d.h"
 #include "Hero.h"
 #include "MonsterController.h"
+#include "GateController.h"
+
 USING_NS_CC;
 
 class GameScene : public Layer
@@ -25,5 +27,9 @@ private:
 	Hero *hero;
 	Sprite *heroShip;
 	MonsterController *monsterController;
+	GateController *gateController;
+
+	int light_score;
+	int boom_score;
 };
 #endif

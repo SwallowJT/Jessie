@@ -1,5 +1,24 @@
 #include "Entity.h"
 
+Entity::Entity()
+{
+
+}
+
+Entity::~Entity()
+{
+
+}
+
+bool Entity::init()
+{
+	if (!Node::init())
+	{
+		return false;
+	}
+	return true;
+}
+
 Sprite* Entity::getSprite()
 {
 	return sprite;

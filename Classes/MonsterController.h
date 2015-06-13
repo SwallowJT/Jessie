@@ -10,7 +10,6 @@ public:
 	CREATE_FUNC(MonsterController);
 	virtual void update(float delta);
 	void bindHero(Hero *hero);
-	void replace_scene(Node *node);
 private:
 	void createMonsters();
 	Vector<Monster*> m_monster;

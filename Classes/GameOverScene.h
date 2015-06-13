@@ -11,6 +11,7 @@ public:
 	virtual bool init();
 	CREATE_FUNC(GameOverScene);
 	void initBG();
+	bool reStart(Touch *touch, Event *event);
 private:
 	Sprite *bg1, *bg2, *bg3, *bg4, *bg5, *bg6;
 };

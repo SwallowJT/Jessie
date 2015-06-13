@@ -7,7 +7,8 @@
 
 GameScene::GameScene()
 {
-
+	light_score = 0;
+	boom_score = 0;
 }
 
 GameScene::~GameScene()
@@ -56,14 +57,20 @@ bool GameScene::init()
 	//hero
 	hero = Hero::create();
 	hero->bindSprite(Sprite::createWithSpriteFrameName("jet4.png"));
+	//hero->setScale(2);
 	hero->setPosition(Vec2(100, 50));
 	this->addChild(hero, 3);
 	hero->setVisible(false);
 
 	//monsters added in monstercontroller
-	monsterController = MonsterController::create();
-	this->addChild(monsterController, 2);
-	monsterController->bindHero(hero);
+// 	monsterController = MonsterController::create();
+// 	this->addChild(monsterController, 2);
+// 	monsterController->bindHero(hero);
+
+	//gates added in gatecontroller
+	gateController = GateController::create();
+	this->addChild(gateController, 2);
+	gateController->bindHero(hero);
 
 
 	//touch event
@@ -169,7 +176,7 @@ bool GameScene::onTouchBegan(Touch *touch, Event *event)
 		if (hero->getIsTouch() == false)
 		{
 			hero->stopAllActions();
-			auto action = Sequence::create(MoveTo::create(0.2, Vec2(100, 50)), CallFuncN::create(CC_CALLBACK_1(GameScene::callback_jump, this)), nullptr);
+			auto action = Sequence::create(MoveTo::create(0.1, Vec2(100, 50)), CallFuncN::create(CC_CALLBACK_1(GameScene::callback_jump, this)), nullptr);
 			hero->runAction(action);
 			hero->setIsTouch(true);
 		}

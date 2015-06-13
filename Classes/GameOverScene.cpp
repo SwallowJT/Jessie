@@ -1,4 +1,5 @@
 #include "GameOverScene.h"
+#include "GameScene.h"
 
 Scene* GameOverScene::createScene()
 {
@@ -25,6 +26,17 @@ bool GameOverScene::init()
 
 	initBG();
 
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->onTouchBegan = CC_CALLBACK_2(GameOverScene::reStart, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+
+	return true;
+}
+
+bool GameOverScene::reStart(Touch *touch, Event *event)
+{
+	Director::getInstance()->replaceScene(TransitionFadeTR::create(1.2,GameScene::createScene()));
 	return true;
 }
 

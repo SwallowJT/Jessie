@@ -11,7 +11,6 @@ class Monster : public Entity
 public:
 	virtual bool init();
 	CREATE_FUNC(Monster);
-	bool isShow;
 	bool isCollideWithHero(Hero *hero);
 	void blink();
 };
