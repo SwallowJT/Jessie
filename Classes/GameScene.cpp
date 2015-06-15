@@ -43,6 +43,7 @@ bool GameScene::init()
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
+	//background
 	initBG();
 
 	//ship falldown and hero jump forever
@@ -57,20 +58,28 @@ bool GameScene::init()
 	//hero
 	hero = Hero::create();
 	hero->bindSprite(Sprite::createWithSpriteFrameName("jet4.png"));
-	//hero->setScale(2);
-	hero->setPosition(Vec2(100, 50));
+	hero->setScale(2);
+	hero->setPosition(Vec2(300, 50));
 	this->addChild(hero, 3);
 	hero->setVisible(false);
 
 	//monsters added in monstercontroller
-// 	monsterController = MonsterController::create();
-// 	this->addChild(monsterController, 2);
-// 	monsterController->bindHero(hero);
+	monsterController = MonsterController::create();
+	this->addChild(monsterController, 2);
+	monsterController->bindHero(hero);
 
 	//gates added in gatecontroller
 	gateController = GateController::create();
 	this->addChild(gateController, 2);
 	gateController->bindHero(hero);
+
+	//add score
+	auto blockSize = Size(visibleSize.width /2, 200);
+	scoreLabel= Label::createWithSystemFont("Score : 0", "Abduction.ttf", 25, blockSize,
+		TextHAlignment::CENTER, TextVAlignment::CENTER);
+	scoreLabel->setAnchorPoint(Vec2(0, 0.5));
+	scoreLabel->setPosition(Vec2(blockSize.width, visibleSize.height * 2 / 3));
+	this->addChild(scoreLabel, 3);
 
 
 	//touch event
@@ -148,6 +157,10 @@ void GameScene::update(float delta)
 	moveBG(bg1, bg2, bg1Speed, delta);
 	moveBG(bg3, bg4, bg3Speed, delta);
 	moveBG(bg5, bg6, bg5Speed, delta);
+
+	char scoreNum[100] = { 0 };
+	sprintf(scoreNum, "score : %d", gateController->getScore());
+	scoreLabel->setString(std::string(scoreNum));
 }
 
 void GameScene::moveBG(Sprite *background1, Sprite *background2, float speed, float delta)
@@ -176,7 +189,7 @@ bool GameScene::onTouchBegan(Touch *touch, Event *event)
 		if (hero->getIsTouch() == false)
 		{
 			hero->stopAllActions();
-			auto action = Sequence::create(MoveTo::create(0.1, Vec2(100, 50)), CallFuncN::create(CC_CALLBACK_1(GameScene::callback_jump, this)), nullptr);
+			auto action = Sequence::create(MoveTo::create(0.1, Vec2(300, 50)), CallFuncN::create(CC_CALLBACK_1(GameScene::callback_jump, this)), nullptr);
 			hero->runAction(action);
 			hero->setIsTouch(true);
 		}

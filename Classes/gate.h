@@ -18,6 +18,7 @@ public:
 	bool isShow;
 	void laser1();//激光闪烁动画
 	void laser2();//激光消失动画
+	bool isValid;
 };
 
 #endif

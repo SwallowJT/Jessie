@@ -31,5 +31,6 @@ private:
 
 	int light_score;
 	int boom_score;
+	Label  *scoreLabel;
 };
 #endif

@@ -15,10 +15,12 @@ public:
 	virtual bool init();
 	CREATE_FUNC(GateController);
 	void bindHero(Hero *hero);
-	virtual void update(float delta);
+	void update(float delta);
+	int getScore();
 private:
 	void createGates();
 	Vector<Gate*> m_gates;
 	Hero *m_hero;
+	int score;
 };
 #endif

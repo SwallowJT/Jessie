@@ -36,8 +36,8 @@ bool HelloWorld::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     // add "HelloWorld" splash screen"
-    auto sprite = Sprite::createWithSpriteFrameName("jet4.png");
-
+    auto sprite = Sprite::create("gate-static1.png");
+	
     // position the sprite on the center of the screen
     sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
 
@@ -64,7 +64,7 @@ bool HelloWorld::init()
 	hero->setPosition(Vec2(0,0));
 
 	auto monster = Monster::create();
-	monster->bindSprite(Sprite::createWithSpriteFrameName("spike.png"));
+	monster->bindSprite(Sprite::create("gate-static1.png"));
 	this->addChild(monster, 1);
 	monster->setPosition(Vec2(300, 100));
 
