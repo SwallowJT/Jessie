@@ -1,5 +1,6 @@
 #include "GameOverScene.h"
 #include "GameScene.h"
+#include "GateController.h"
 
 Scene* GameOverScene::createScene()
 {
@@ -16,13 +17,43 @@ bool GameOverScene::init()
 		return false;
 	}
 
+	int score = GateController::score;
+	log("score = %d", score);
+
 	auto size = Director::getInstance()->getVisibleSize();
 	auto blockSize = Size(size.width / 3, 200);
-	auto gameOver = Label::createWithSystemFont("GAME OVER", "Abduction.ttf", 50, blockSize,
+	auto gameOver = Label::createWithSystemFont("GAME OVER", "Abduction.ttf", 35, blockSize,
 		TextHAlignment::CENTER, TextVAlignment::CENTER);
 	gameOver->setAnchorPoint(Vec2(0, 0.5));
-	gameOver->setPosition(Vec2(blockSize.width, size.height / 2));
+	gameOver->setPosition(Vec2(blockSize.width, size.height * 2 / 3));
 	this->addChild(gameOver,3);
+
+	char szName[100];
+	sprintf(szName, "your score : %d", score);
+	auto m_score = Label::createWithSystemFont(szName, "Abduction.ttf", 15, blockSize,
+		TextHAlignment::CENTER, TextVAlignment::CENTER);
+	m_score->setAnchorPoint(Vec2(0, 0.5));
+	m_score->setPosition(Vec2(blockSize.width, size.height * 5 / 12));
+	this->addChild(m_score, 3);
+
+	int highestScore = UserDefault::getInstance()->getIntegerForKey("highestScore");
+	if (score > highestScore)
+	{
+		UserDefault::getInstance()->setIntegerForKey("highestScore", score);
+		UserDefault::getInstance()->flush();//一定不要忘了，否则数据修改不会写入xml中
+		highestScore = score;
+	}
+
+	char szName2[100];
+	sprintf(szName2, "highest score : %d", highestScore);
+	auto highest_score = Label::createWithSystemFont(szName2, "Abduction.ttf", 15, blockSize,
+		TextHAlignment::CENTER, TextVAlignment::CENTER);
+	highest_score->setAnchorPoint(Vec2(0, 0.5));
+	highest_score->setPosition(Vec2(blockSize.width, size.height / 4));
+	this->addChild(highest_score, 3);
+
+	//重置分数
+	GateController::score = 0;
 
 	initBG();
 

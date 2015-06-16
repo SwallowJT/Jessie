@@ -16,11 +16,13 @@ public:
 	CREATE_FUNC(GateController);
 	void bindHero(Hero *hero);
 	void update(float delta);
-	int getScore();
+	void updateScore(int score);
+	static int score;  //可以使用UserDefault键值对实现数据的共享
 private:
 	void createGates();
 	Vector<Gate*> m_gates;
 	Hero *m_hero;
-	int score;
+	//int score;
+	Label  *scoreLabel;
 };
 #endif

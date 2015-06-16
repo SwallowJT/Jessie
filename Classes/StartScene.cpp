@@ -35,6 +35,11 @@ bool StartScene::init()
 		return false;
 	}
 	
+	if (!UserDefault::getInstance()->isXMLFileExist())
+	{
+		UserDefault::getInstance()->setIntegerForKey("highestScore", 0);
+	}
+
 	this->scheduleUpdate();
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();

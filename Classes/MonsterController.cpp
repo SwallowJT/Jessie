@@ -1,7 +1,7 @@
 #include "MonsterController.h"
 #include "GameOverScene.h"
 
-#define MAX_MONSTER 5
+#define MAX_MONSTER 3
 
 bool MonsterController::init()
 {

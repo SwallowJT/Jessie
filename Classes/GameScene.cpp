@@ -22,8 +22,8 @@ Scene* GameScene::createScene()
 	auto layer = GameScene::create();
 	scene->addChild(layer);
 	//创建场景中其他层（UI）应该是使用这种方式吧
-// 	auto gameoverLayer = GameOverLayer::create();
-// 	scene->addChild(gameoverLayer, 0);
+	// 	auto gameoverLayer = GameOverLayer::create();
+	// 	scene->addChild(gameoverLayer, 0);
 	return scene;
 }
 
@@ -59,7 +59,7 @@ bool GameScene::init()
 	hero = Hero::create();
 	hero->bindSprite(Sprite::createWithSpriteFrameName("jet4.png"));
 	hero->setScale(2);
-	hero->setPosition(Vec2(300, 50));
+	hero->setPosition(Vec2(100, 50));
 	this->addChild(hero, 3);
 	hero->setVisible(false);
 
@@ -73,14 +73,15 @@ bool GameScene::init()
 	this->addChild(gateController, 2);
 	gateController->bindHero(hero);
 
-	//add score
+	//add score  交给gatecontroller处理
+	/*
 	auto blockSize = Size(visibleSize.width /2, 200);
 	scoreLabel= Label::createWithSystemFont("Score : 0", "Abduction.ttf", 25, blockSize,
 		TextHAlignment::CENTER, TextVAlignment::CENTER);
 	scoreLabel->setAnchorPoint(Vec2(0, 0.5));
 	scoreLabel->setPosition(Vec2(blockSize.width, visibleSize.height * 2 / 3));
 	this->addChild(scoreLabel, 3);
-
+	*/
 
 	//touch event
 	auto listener = EventListenerTouchOneByOne::create();
@@ -158,10 +159,14 @@ void GameScene::update(float delta)
 	moveBG(bg3, bg4, bg3Speed, delta);
 	moveBG(bg5, bg6, bg5Speed, delta);
 
-	char scoreNum[100] = { 0 };
-	sprintf(scoreNum, "score : %d", gateController->getScore());
-	scoreLabel->setString(std::string(scoreNum));
+	//这种方法效率太低，每帧都要检测。在碰撞检测中，如果碰撞了再改，更好，在gatecontroller中实现
+	//CCString* strScore = CCString::createWithFormat("%d", score);//格式化为字符串  
+	//scoreItem->setString(strScore->m_sString.c_str());//从CCString中获得char*,更新分数  
+	//char scoreNum[100] = { 0 };
+	//sprintf(scoreNum, "score : %d", gateController->getScore());
+	//scoreLabel->setString(std::string(scoreNum));
 }
+
 
 void GameScene::moveBG(Sprite *background1, Sprite *background2, float speed, float delta)
 {
@@ -189,15 +194,13 @@ bool GameScene::onTouchBegan(Touch *touch, Event *event)
 		if (hero->getIsTouch() == false)
 		{
 			hero->stopAllActions();
-			auto action = Sequence::create(MoveTo::create(0.1, Vec2(300, 50)), CallFuncN::create(CC_CALLBACK_1(GameScene::callback_jump, this)), nullptr);
+			auto action = Sequence::create(MoveTo::create(0.1, Vec2(100, 50)), CallFuncN::create(CC_CALLBACK_1(GameScene::callback_jump, this)), nullptr);
 			hero->runAction(action);
 			hero->setIsTouch(true);
 		}
 	}
-	else
-	{
-		
-	}
-	
 	return true;
 }
+
+
+

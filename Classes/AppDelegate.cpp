@@ -1,6 +1,7 @@
 ﻿#include "AppDelegate.h"
 #include "HelloWorldScene.h"
 #include "StartScene.h"
+#include "GameScene.h"
 
 USING_NS_CC;
 
@@ -39,9 +40,8 @@ bool AppDelegate::applicationDidFinishLaunching() {
         director->setOpenGLView(glview);
     }
 
-	glview->setFrameSize(500,400);//设置窗口分辨率
-	glview->setDesignResolutionSize(1024,512, ResolutionPolicy::SHOW_ALL); //设计分辨率（可视区域）
-														//SHOW_ALL按参数形成的比例缩放以适应屏幕大小
+	glview->setFrameSize(1024,768);
+	glview->setDesignResolutionSize(512,360, ResolutionPolicy::SHOW_ALL); 
 
     // turn on display FPS
     director->setDisplayStats(true);

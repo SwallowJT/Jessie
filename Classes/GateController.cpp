@@ -1,12 +1,13 @@
 #include "GateController.h"
+#include "GameScene.h"
 
 #define  max_gate 3
 
-
+int GateController::score = 0;
 
 GateController::GateController()
 {
-	score = 0;
+	//score = 0;
 }
 
 GateController::~GateController()
@@ -21,6 +22,14 @@ bool GateController::init()
 		return false;
 	}
 	createGates();
+
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	auto blockSize = Size(visibleSize.width / 2, 200);
+	scoreLabel = Label::createWithSystemFont("Score : 0", "Abduction.ttf", 25, blockSize,
+		TextHAlignment::CENTER, TextVAlignment::CENTER);
+	scoreLabel->setAnchorPoint(Vec2(0, 0.5));
+	scoreLabel->setPosition(Vec2(blockSize.width, visibleSize.height * 2 / 3));
+	this->addChild(scoreLabel, 3);
 
 	this->scheduleUpdate();
 
@@ -60,9 +69,9 @@ void GateController::update(float delta)
 		{
 			//执行动画的精灵需要纹理，但是动画已经包含了很多纹理，当我停止所有动画，显示在屏幕上的是精灵的纹理，还是某一帧动画
 			gate->getSprite()->stopAllActions();
-			//gate->getSprite()->setVisible(false);
 			gate->isValid = false;
 			score++;
+			this->updateScore(score);
 			gate->laser2();
 		}
 		if (gate->getPosition().x < 0 )
@@ -79,7 +88,9 @@ void GateController::update(float delta)
 	}
 }
 
-int GateController::getScore()
+void GateController::updateScore(int score)
 {
-	return score;
+	char scoreNum[100] = { 0 };
+	sprintf(scoreNum, "score : %d", score);
+	scoreLabel->setString(std::string(scoreNum));
 }
